@@ -1,0 +1,36 @@
+** Design a One-Server Web Infrastructure for www.foobar.com **
+
+""" 
+User Access Process:
+When a user wants to visit www.foobar.com:
+
+The user types www.foobar.com into their browser.
+The browser sends a request to the DNS server to resolve the domain name www.foobar.com to an IP address.
+The DNS server looks up the A record for www.foobar.com and returns the IP address 8.8.8.8.
+The user's request is routed to the server at IP 8.8.8.8, where Nginx processes the HTTP request.
+Nginx forwards any dynamic requests (PHP, etc.) to the application server.
+The application server interacts with the MySQL database if necessary (e.g., to retrieve data), and generates the requested web pages.
+Nginx then returns the requested page to the user's browser, completing the request.
+
+"""
+
+-------------------
+
+"""
+Server: The physical or virtual machine hosting your website.
+Domain Name: Acts as the user-friendly name (foobar.com) mapped to the server’s IP (8.8.8.8).
+DNS Record: Explain that the www record in www.foobar.com is an A record that points to your server’s IP.
+Web Server (Nginx): Handles HTTP requests and serves static content (HTML, CSS).
+Application Server: Executes the dynamic backend logic (PHP, Python).
+Database (MySQL): Stores the website’s data.
+
+"""
+-------------------
+
+"""
+Issues with this Infrastructure:
+
+Single Point of Failure (SPOF): Since there is only one server, if it fails, the entire website goes down.
+Downtime During Maintenance: Deploying new code or updating software requires restarting the server, causing downtime.
+Scalability: A single server cannot handle too much traffic. There's no way to scale the infrastructure to handle increased traffic.
+""""
