@@ -1,0 +1,40 @@
+### **Updated Web Infrastructure Design**
+
+We’ve made some key upgrades to improve performance and scalability:
+
+1. **Four Servers**:
+   - **Web Server**: Handles and serves static content like images and HTML.
+   - **Application Server**: Manages business logic and dynamic content.
+   - **Database Server**: Takes care of data storage and queries.
+   - **Additional Server**: Reserved for future use or as a backup.
+
+2. **Load Balancer (HAProxy)**:
+   - **HAProxy Cluster**: Distributes traffic evenly across the servers and ensures high availability.
+
+3. **Firewalls**: Each server has its own firewall for extra security.
+
+4. **SSL Certificate**: Encrypts data between users and the site with HTTPS.
+
+5. **Monitoring Clients**: Installed on all servers to track performance and health.
+
+### **Why These Changes?**
+
+- **Load Balancer**: Helps manage traffic by balancing the load across servers, preventing any one server from being overwhelmed. The HAProxy cluster ensures that if one load balancer fails, the other keeps things running smoothly.
+
+- **Separate Servers for Different Roles**: By having dedicated servers for web, application, and database functions, we can optimize each one for its specific task, improving overall performance and making it easier to scale.
+
+- **Additional Server**: Provides flexibility for growth and can act as a backup if needed.
+
+### **Potential Issues and Fixes**
+
+1. **SSL Termination at the Load Balancer**:
+   - **Issue**: Internal traffic is not encrypted.
+   - **Fix**: Use end-to-end encryption to protect data throughout its journey.
+
+2. **Database Bottleneck**:
+   - **Issue**: A single database server might become a performance bottleneck.
+   - **Fix**: Add replication and load balancing for better performance and reliability.
+
+3. **Scaling Challenges**:
+   - **Issue**: Scaling individual components can be tricky.
+   - **Fix**: Consider using containerization or orchestration tools for easier management and scaling.
