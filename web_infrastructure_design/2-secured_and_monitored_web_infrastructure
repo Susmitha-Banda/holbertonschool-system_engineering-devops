@@ -1,0 +1,49 @@
+### **Web Infrastructure Design Overview**
+The infrastructure includes three servers, each hosting the website `www.foobar.com`. It is designed to ensure security, encrypted traffic, and continuous monitoring. The main components are:
+
+1. **Three Firewalls**: Each server has a dedicated firewall to filter and protect against unauthorized access and attacks.
+2. **SSL Certificate**: Encrypts data between users and the website, serving traffic over HTTPS to ensure data security.
+3. **Three Monitoring Clients**: Installed on each server to collect and send data to a monitoring tool like Sumologic, tracking performance and health.
+
+### Explanation of Each Component
+
+1. **Firewalls**:
+   Firewalls are added to filter and control incoming and outgoing network traffic based on predefined security rules. 
+
+2. **SSL Certificate**:
+  An SSL certificate is used to encrypt data transmitted between the user's browser and the website. 
+   
+3. **Monitoring Clients**:
+   The monitoring clients (e.g., Sumologic agents) are installed on each server to collect and transmit logs, metrics, and performance data.
+  
+
+### Specifics of the Infrastructure
+
+- **Why is Traffic Served Over HTTPS?**  
+  Serving traffic over HTTPS encrypts data, making it secure against interception or eavesdropping.
+
+- **What is Monitoring Used For?**  
+  Monitoring helps ensure the reliability and performance of the infrastructure. It provides insights into system behavior, detects anomalies, and alerts administrators about potential issues before they escalate.
+
+- **How Does the Monitoring Tool Collect Data?**  
+  The monitoring clients collect various logs and metrics (such as server load, response times, errors, etc.) and send them to a central monitoring platform like Sumologic, where the data is analyzed and visualized.
+
+- **How to Monitor Web Server QPS (Queries Per Second)?**  
+  Configure the monitoring tool to track web server logs and metrics. Use log queries or metrics that capture the number of requests handled by the server per second. Set up alerts for thresholds to manage traffic spikes and resource allocation.
+
+### Infrastructure Issues and Solutions
+1. **SSL Termination at Load Balancer:** 
+
+    Issue: Decrypting at the load balancer leaves internal traffic unprotected.
+    
+    Solution: Use end-to-end encryption to keep traffic secure all the way to the servers.
+2. **Single MySQL Server for Writes:**
+
+    Issue: Creates a bottleneck and risks downtime if the server fails.
+
+    Solution: Use multiple servers for database writes to balance the load and improve redundancy.
+3. **Same Components on All Servers:**
+
+    Issue: Inefficient use of resources and complicates scaling.
+
+    Solution: Separate roles (web, app, database) across different servers for better performance and scalability.
