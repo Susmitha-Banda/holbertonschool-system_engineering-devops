@@ -1,0 +1,46 @@
+### **Three-Server Setup for www.foobar.com**
+
+**How It Works:**
+
+1. **User Access:**
+   - User types `www.foobar.com` in their browser.
+   - DNS translates the domain to IP `8.8.8.8`.
+   - The request is sent to the server at that IP.
+
+2. **Load Balancer:**
+   - **Role:** Acts like a traffic cop, directing incoming requests to different servers.
+   - **Distribution Method:** Uses algorithms like Round Robin (sending requests in turn) or Least Connections (sending requests to the server with the fewest connections).
+
+3. **Servers:**
+   - **Web Server (Nginx):** Handles static content (HTML, CSS) and forwards complex requests to the application server.
+   - **Application Server:** Manages dynamic content and processing (e.g., login checks).
+   - **Database (MySQL):** Stores and retrieves data (e.g., user info, content).
+
+**Why Each Part Matters:**
+
+- **Load Balancer:** Distributes traffic to prevent any one server from getting overwhelmed.
+- **Web Server (Nginx):** Serves static files quickly.
+- **Application Server:** Handles complex logic and interactions.
+- **Database (MySQL):** Keeps data organized and accessible.
+
+### **Potential Issues:**
+
+1. **Single Point of Failure (SPOF):**
+   - **Problem:** If any server fails, it can affect the entire site. Using multiple servers for each role can reduce this risk.
+
+2. **Security Issues:**
+   - **No Firewall:** The server is exposed to potential attacks.
+   - **No HTTPS:** Data is not encrypted, risking interception.
+
+3. **No Monitoring:**
+   - **Problem:** Without monitoring, issues may go unnoticed until they cause significant problems.
+
+### **Additional Details:**
+
+- **Active-Active vs. Active-Passive:**
+  - **Active-Active:** All servers are active and handle requests simultaneously.
+  - **Active-Passive:** Only one server is active; others are standby and take over if needed.
+
+- **Primary-Replica Database Cluster:**
+  - **Primary Node:** Handles all data changes.
+  - **Replica Node:** Handles read requests and helps balance the load.
